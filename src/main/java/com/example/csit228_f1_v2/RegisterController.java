@@ -33,6 +33,11 @@ public class RegisterController {
             String uname = tfUsername.getText();
             String pass = tfPass.getText();
 
+            if (fname.isEmpty() || lname.isEmpty() || uname.isEmpty() || pass.isEmpty()) {
+                showAlert("Please fill in all the fields.");
+                return;
+            }
+
             checkStatement.setString(1, uname);
             ResultSet resultSet = checkStatement.executeQuery();
             resultSet.next();

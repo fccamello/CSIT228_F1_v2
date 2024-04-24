@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class ListbookPage {
 
@@ -70,13 +71,24 @@ public class ListbookPage {
 
     public void btnListBookOnClick() throws SQLException {
         int paraLibId = foreignLibID(hideLibId.getText());
+        String year = null;
         try (Connection c = MySQLConnection.getConnection();
              PreparedStatement statement = c.prepareStatement("INSERT INTO tblbooks (title, author, date_pub, description, libid) VALUES (?,?,?,?,?)")) {
             String title = tftitle.getText();
             String author = tfauthor.getText();
-            String year = dpyear.getValue().toString();
+            try {
+                year = dpyear.getValue().toString();
+            } catch (Exception e) {
+                showAlert("Valid Date only PLEASE!.");
+                return;
+            }
             String desc = tfdesc.getText();
 
+
+            if (title.isEmpty() || author.isEmpty() || dpyear.getValue() == null || desc.isEmpty()) {
+                showAlert("Please fill in all fields.");
+                return;
+            }
 
             statement.setString(1, title);
             statement.setString(2, author);
@@ -141,7 +153,7 @@ public class ListbookPage {
                         } else {
 
                             System.out.println(currentUsername);
-                            showAlert("You are not the Librarian. You cannot delete this book!");
+                            showAlert("You are not the Librarian. You can only delete your own listing!");
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -156,7 +168,7 @@ public class ListbookPage {
                             updateBook(title, author, year, description);
                         } else {
                             System.out.println(currentUsername);
-                            showAlert("You are not the Librarian. You cannot update this book!");
+                            showAlert("You are not the Librarian. You can only update your own listing!");
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -191,6 +203,7 @@ public class ListbookPage {
 
 
     public void updateBook(String title, String author, String year, String description) throws SQLException {
+
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -199,6 +212,7 @@ public class ListbookPage {
         TextField authorTextField = new TextField(author);
         DatePicker yearDatePicker = new DatePicker(LocalDate.parse(year));
         TextField descriptionTextField = new TextField(description);
+
 
         gridPane.add(new Label("Title:"), 0, 0);
         gridPane.add(titleTextField, 1, 0);
@@ -209,7 +223,6 @@ public class ListbookPage {
         gridPane.add(new Label("Description:"), 0, 3);
         gridPane.add(descriptionTextField, 1, 3);
 
-        // Create an Alert dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Update Book");
         alert.setHeaderText(null);
@@ -266,6 +279,9 @@ public class ListbookPage {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
+
 
 
 }

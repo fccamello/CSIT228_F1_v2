@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.example.csit228_f1_v2.LogInController.loggedUserName;
@@ -31,6 +32,7 @@ public class AccountSettingsController {
         lblPassword.setText(password);
     }
 
+
     @FXML
     public void updateAccount() {
         TextField fn = new TextField(lblFirstName.getText());
@@ -47,13 +49,18 @@ public class AccountSettingsController {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Update Account");
-        alert.setHeaderText(null);
         alert.getDialogPane().setContent(gridPane);
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
+                String updatedUsername = un.getText();
+                if (!updatedUsername.equals(lblUsername.getText()) && usernameExists(updatedUsername)) {
+                    showAlert("Username already exists.");
+                    return;
+                }
+
                 lblflName.setText(fn.getText() + " " + ln.getText() + " ! ");
-                lblUsername.setText(un.getText());
+                lblUsername.setText(updatedUsername);
                 lblPassword.setText(pass.getText());
 
                 try (Connection connection = MySQLConnection.getConnection()) {
@@ -62,7 +69,7 @@ public class AccountSettingsController {
 
                         statement.setString(1, fn.getText());
                         statement.setString(2, ln.getText());
-                        statement.setString(3, un.getText());
+                        statement.setString(3, updatedUsername);
                         statement.setString(4, pass.getText());
 
                         statement.executeUpdate();
@@ -122,4 +129,27 @@ public class AccountSettingsController {
         x.getChildren().clear();
         x.getChildren().add(root);
     }
+
+
+    private boolean usernameExists(String username) {
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM tblLibrarian WHERE username = ?")) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+            return count > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 }
