@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pnMain" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #f1bf00;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.AccountSettingsController">
+
+    <children>
+        <Label layoutX="82.0" layoutY="62.0" prefHeight="58.0" prefWidth="463.0" text="CIT-U Library Database" textFill="#fd0000">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
+        <Label layoutX="91.0" layoutY="167.0" text="Hello Librarian, ">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Label layoutX="91.0" layoutY="228.0" text="Username:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label layoutX="91.0" layoutY="266.0" text="Password:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="lblflName" layoutX="233.0" layoutY="167.0" prefHeight="17.0" prefWidth="227.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Label fx:id="lblLastName" layoutX="360.0" layoutY="107.0" prefHeight="17.0" prefWidth="172.0" visible="false" />
+        <Label fx:id="lblUsername" layoutX="197.0" layoutY="224.0" prefHeight="30.0" prefWidth="205.0" />
+        <Label fx:id="lblPassword" layoutX="205.0" layoutY="262.0" prefHeight="30.0" prefWidth="205.0" />
+        <Button layoutX="233.0" layoutY="356.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="30.0" prefWidth="104.0" text="Update Account" />
+        <Button layoutX="361.0" layoutY="358.0" mnemonicParsing="false" onAction="#deleteAccount" text="Delete Account" />
+      <Label fx:id="lblFirstName" layoutX="160.0" layoutY="58.0" prefHeight="17.0" prefWidth="227.0" visible="false" />
+      <Button layoutX="90.0" layoutY="309.0" mnemonicParsing="false" onAction="#listBook" prefHeight="25.0" prefWidth="368.0" text="List a Book" />
+      <Label layoutX="91.0" layoutY="116.0" prefHeight="30.0" prefWidth="322.0" text="Account Settings" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

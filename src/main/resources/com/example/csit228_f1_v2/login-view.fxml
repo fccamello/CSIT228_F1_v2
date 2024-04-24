@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pnMain" prefHeight="249.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.HelloController">
-   <children>
-      <GridPane fx:id="pnLogin" alignment="CENTER" hgap="22.0" prefHeight="249.0" prefWidth="389.0" vgap="10.0">
-          <padding>
-              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-          </padding>
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" />
-            <ColumnConstraints />
-            <ColumnConstraints halignment="CENTER" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints valignment="CENTER" />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-         <children>
-            <Label text="Username" GridPane.rowIndex="1" />
-            <TextField minWidth="125.0" prefHeight="28.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <Label text="Password" GridPane.rowIndex="3" />
-            <TextField accessibleRole="PASSWORD_FIELD" minWidth="125.0" prefHeight="28.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <Button fx:id="btnSignIn" mnemonicParsing="false" text="Sign In" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: RED;" text="LOG IN USER" textAlignment="CENTER" GridPane.columnSpan="3" />
-         </children>
-      </GridPane>
-   </children>
+<AnchorPane fx:id="pnMain" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #f1bf00;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.LogInController">
+
+    <children>
+        <Label layoutX="82.0" layoutY="62.0" prefHeight="58.0" prefWidth="463.0" text="CIT-U Library Database" textFill="#fd0000">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+        </Label>
+        <Label layoutX="85.0" layoutY="196.0" text="Username">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <TextField fx:id="lgpass" layoutX="227.0" layoutY="247.0" minWidth="125.0" prefHeight="28.0" prefWidth="274.0" />
+        <TextField fx:id="lguname" accessibleRole="PASSWORD_FIELD" layoutX="227.0" layoutY="193.0" minWidth="125.0" prefHeight="28.0" prefWidth="274.0" />
+        <Label layoutX="85.0" layoutY="129.0" prefHeight="30.0" prefWidth="104.0" text="Log In" textFill="WHITE">
+         <font>
+             <Font name="System Bold" size="20.0" />
+         </font></Label>
+        <Label layoutX="87.0" layoutY="250.0" text="Password">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Button fx:id="btnSignIn" layoutX="227.0" layoutY="305.0" mnemonicParsing="false" onAction="#login" prefHeight="11.0" prefWidth="274.0" text="Sign In" />
+        <Label fx:id="lblAdded" layoutX="36.0" layoutY="304.0" prefHeight="28.0" prefWidth="283.0" text="User added. You are now a Librarian!" textAlignment="RIGHT" visible="false" />
+      <Button fx:id="btnReg" layoutX="81.0" layoutY="305.0" mnemonicParsing="false" onAction="#reg" prefWidth="111.0" text="Register" />
+
+    </children>
 </AnchorPane>
